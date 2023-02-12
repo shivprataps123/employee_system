@@ -56,20 +56,20 @@ const Single_Employee_details_page = () => {
 <Heading  mt={["20%","13%","8%"]} ml={["20%","13%","26%"]}  >Employee Details</Heading>
 <Box display="flex"  boxShadow='xl' p='6' rounded='md' w={["70%","60%","","50%"]} margin="auto"  border="px solid red" mt={["8%","4%","","1%"]}>
  
-   <Box border="px solid red">
-    <Image borderRadius="100%" w="50%" display="block" margin="auto" src={currentEmployee.Imageurl}/>
+   <Box w="50%" bgColor="hsl(0,0%,92%)" borderRadius="10px" border="px solid red">
+    <Image borderRadius="100%" w="40%" display="block" margin="auto" src={currentEmployee.Imageurl}/>
   
      <Box align="center" mt="3%" >
     <Button onClick={()=>navigate(`/edit_employee/${id}`)} color="white" _hover={{ bg: '#03a9f4' }} bgColor="#03a9f4">Edit Details</Button>
     <Button onClick={handledelete} color="white" _hover={{ bg: 'red' }}  bgColor="red" ml="10px">Delete Employee</Button>
     </Box>
    </Box>
-   <Box  p="1%" fontSize="20px" fontFamily="sans-serif" fontWeight="semibold" >
-   <Text textAlign="center" >Full-Name : <span>{currentEmployee.firstname}</span></Text>
-   <Text textAlign="center" >Last-Name : <span>{currentEmployee.lastname}</span></Text>
-    <Text textAlign="center" >{`Employee-Id : ${currentEmployee.employeeid}`}</Text>
-    <Text textAlign='center' >{`Designation : ${currentEmployee.designation}`}</Text>
-    <Text textAlign="center" >{`Age : ${currentEmployee.age}`}</Text>
+   <Box  p="1%" fontSize="20px" fontFamily="c" fontWeight="bold" >
+   <Text textAlign="center"  >Full-Name : <span>{currentEmployee.firstname}</span></Text>
+   <Text  textAlign="center" >Last-Name : <span>{currentEmployee.lastname}</span></Text>
+    <Text  textAlign="center" >{`Employee-Id : ${currentEmployee.employeeid}`}</Text>
+    <Text  textAlign="center" >{`Designation : ${currentEmployee.designation}`}</Text>
+    <Text  textAlign="center" >{`Age : ${currentEmployee.age}`}</Text>
     
     </Box>
     {/* <Button ml="6%" mt="6%" onClick={handledelete} color="white" _hover={{ bg: 'red' }}  bgColor="red">Delete Employee</Button> */}
