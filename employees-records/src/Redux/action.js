@@ -4,7 +4,8 @@ import axios from 'axios';
 // -----------------------GETTING DATA-------------------------------
 const getDataRequest=()=>{
     return {
-        type:types.GET_EMPLOYEES_DATA_REQUEST
+        type:types.GET_EMPLOYEES_DATA_REQUEST,
+       
     }
 };
 const getDataSuccess=(payload)=>{
@@ -78,18 +79,40 @@ const deleteDataError=()=>{
         type:types.DELETE_EMPLOYEES_DATA_ERROR
     }
 }
+// -------------------search-------------------------------
+const searchDataRequest=(query)=>{
+    return {
+        type:types.SEARCH_EMPLOYEES_DATA_REQUEST,
+        query
+    }
+}
+const searchDataSuccess=(payload)=>{
+    return {
+        type:types.SEARCH_EMPLOYEES_DATA_SUCCESS,
+        payload
+
+    }
+}
+const searchDataError=()=>{
+    return {
+        type:types.SEARCH_EMPLOYEES_DATA_ERROR
+    }
+}
 // ---------api call for get data---------------
 
-export const getData=(dispatch)=>()=>{
+export const getData=(params)=>(dispatch)=>{
+    // console.log("hi")
     dispatch(getDataRequest());
-    return axios.get(`http://localhost:8080/employees`)
-    .then((response)=>dispatch(getDataSuccess(response.data)))
+    return axios.get(`http://localhost:8080/employees`,params)
+    .then((response)=>{
+        dispatch(getDataSuccess(response.data))})
     .catch((error)=>{
         console.log("error in getting data",error);
         dispatch(getDataError(error))
     })
-
+    
 }
+
 
 // ---------request for adding data-------------
 
@@ -104,28 +127,39 @@ export const addData=(payload)=>(dispatch)=>{
      })
 }
 
-// ------------------------request for updating data----------------------------
+// // ------------------------request for updating data----------------------------
 
-export const updateData=(id,payload)=>(dispatch)=>{
-     dispatch(updateDataRequest());
-     return axios
-     .patch(`http://localhost:8080/employees/${id}`,payload)
-     .then((response)=>updateDataSuccess(response.data))
-     .catch((error)=>{
-        console.log('error in updating',error);
-        updateDataError(err)
-     })
-}
+// export const updateData=(id,payload)=>(dispatch)=>{
+//      dispatch(updateDataRequest());
+//      return axios
+//      .patch(`http://localhost:8080/employees/${id}`,payload)
+//      .then((response)=>updateDataSuccess(response.data))
+//      .catch((error)=>{
+//         console.log('error in updating',error);
+//         updateDataError(error)
+//      })
+// }
 
-// ------------------------deleting data------------------
+// // ------------------------deleting data------------------
 
-export const deleteData=(id)=>(dispatch)=>{
-    dispatch(deleteDataRequest());
-    return axios
-    .delete(`http://localhost:8080/employees/${id}`)
-    .then((response)=>{dispatch(deleteDataSuccess(id))})
+// export const deleteData=(id)=>(dispatch)=>{
+//     dispatch(deleteDataRequest());
+//     return axios
+//     .delete(`http://localhost:8080/employees/${id}`)
+//     .then((response)=>{dispatch(deleteDataSuccess(id))})
+//     .catch((error)=>{
+//         console.log('error in deleting',error);
+//         dispatch(deleteDataError(error))
+//     })
+// }
+// -----------searching---------------------------------
+export const SearchData=(query)=>(dispatch)=>{
+    dispatch(searchDataRequest(query));
+    return axios.get(`http://localhost:8080/employees?q=${query}`,)
+    .then((response)=>dispatch(searchDataSuccess(response.data)))
     .catch((error)=>{
-        console.log('error in deleting',error);
-        dispatch(deleteDataError(error))
+        console.log("error in search data",error);
+        dispatch(searchDataError(error))
     })
+    
 }

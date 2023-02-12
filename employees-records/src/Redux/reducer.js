@@ -1,9 +1,10 @@
 import * as types from './actionTypes';
 
 const initialState={
-    employess:[],
+    employees:[],
     isLoading:false,
     isError:false
+    
 };
 
 const reducer=(oldState=initialState,action)=>{
@@ -20,7 +21,7 @@ const reducer=(oldState=initialState,action)=>{
             return {
                    ...oldState,
                    isLoading:false,
-                   employess:payload
+                   employees:payload
                 }
         case types.GET_EMPLOYEES_DATA_ERROR:
             return {
@@ -38,7 +39,7 @@ const reducer=(oldState=initialState,action)=>{
             return {
                    ...oldState,
                    isLoading:false,
-                   data:[...oldState.employess,payload]
+                   data:[...oldState.employees,payload]
                   }
         case types.ADD_EMPLOYEES_DATA_ERROR:
             return {
@@ -54,7 +55,7 @@ const reducer=(oldState=initialState,action)=>{
                    isLoading:true
                   }
         case types.UPDATE_EMPLOYEES_DATA_SUCCESS:
-            let newData=oldState.employess.map((item)=>item.id===payload.id?payload:item)
+            let newData=oldState.employees.map((item)=>item.id===payload.id?payload:item)
             return {
                    ...oldState,
                    isLoading:false,
@@ -74,11 +75,11 @@ const reducer=(oldState=initialState,action)=>{
                        isLoading:true
                       }
         case types.DELETE_EMPLOYEES_DATA_SUCCESS:
-                let filteredData=oldState.employess.filter((item)=>item.id!==payload)
+                let filteredData=oldState.employees.filter((item)=>item.id!==payload)
                 return {
                        ...oldState,
                        isLoading:false,
-                       employess:filteredData
+                       employees:filteredData
                       }
         case types.DELETE_EMPLOYEES_DATA_ERROR:
                 return {
@@ -86,6 +87,25 @@ const reducer=(oldState=initialState,action)=>{
                        isLoading:false,
                        isError:true
                        }
+        // -----search function=---------
+        case types.SEARCH_EMPLOYEES_DATA_REQUEST:
+            return {
+                   ...oldState,
+                   isLoading:true
+                  }
+    case types.SEARCH_EMPLOYEES_DATA_SUCCESS:
+            return {
+                   ...oldState,
+                   isLoading:false,
+                   employees:payload
+                  }
+    case types.SEARCH_EMPLOYEES_DATA_ERROR:
+            return {
+                   ...oldState,
+                   isLoading:false,
+                   isError:true
+                   }
+
         default:
             return oldState
         }
