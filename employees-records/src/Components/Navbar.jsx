@@ -1,7 +1,9 @@
 import { Box, Button, Flex, IconButton, Link, Text, useColorMode } from "@chakra-ui/react";
 import {FaLightbulb} from  'react-icons/fa'
+import { useNavigate } from "react-router-dom";
 import Add_details from "../Pages/Add_details";
 function Navbar() {
+  const navigate=useNavigate();
   const { colorMode, toggleColorMode } = useColorMode();
   return (
     <Box
@@ -16,7 +18,7 @@ function Navbar() {
      alignItems="center"
      bg={colorMode === "light" ? "#03a9f4" : "rgb(33,33,33)"}
      >
-     <Text cursor="pointer" display={["none","block","block"]} fontFamily="sans-serif" fontSize="30px" fontWeight="bold" color="white">Employees</Text>
+     <Link style={{textDecoration:"none"}} onClick={()=>navigate("/")}><Text cursor="pointer" display={["none","block","block"]} fontFamily="sans-serif" fontSize="30px" fontWeight="bold" color="white">Employees</Text></Link>
    <Box display="flex">
     <Add_details/>
     <Box mt="3px">

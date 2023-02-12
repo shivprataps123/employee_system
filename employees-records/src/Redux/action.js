@@ -103,7 +103,7 @@ const searchDataError=()=>{
 export const getData=(params)=>(dispatch)=>{
     // console.log("hi")
     dispatch(getDataRequest());
-    return axios.get(`http://localhost:8080/employees`,params)
+    return axios.get(`https://techflitter.onrender.com/employees`,params)
     .then((response)=>{
         dispatch(getDataSuccess(response.data))})
     .catch((error)=>{
@@ -119,7 +119,7 @@ export const getData=(params)=>(dispatch)=>{
 export const addData=(payload)=>(dispatch)=>{
      dispatch(addDataRequest());
      return axios
-     .post(`http://localhost:8080/employees`,payload)
+     .post(`https://techflitter.onrender.com/employees`,payload)
      .then((response)=>{dispatch(addDataSuccess(response.data))})
      .catch((error)=>{
         console.log("error in adding data",error);
@@ -132,7 +132,7 @@ export const addData=(payload)=>(dispatch)=>{
 export const updateData=(id,payload)=>(dispatch)=>{
      dispatch(updateDataRequest());
      return axios
-     .patch(`http://localhost:8080/employees/${id}`,payload)
+     .patch(`https://techflitter.onrender.com/employees/${id}`,payload)
      .then((response)=>updateDataSuccess(response.data))
      .catch((error)=>{
         console.log('error in updating',error);
@@ -145,7 +145,7 @@ export const updateData=(id,payload)=>(dispatch)=>{
 export const deleteData=(id)=>(dispatch)=>{
     dispatch(deleteDataRequest());
     return axios
-    .delete(`http://localhost:8080/employees/${id}`)
+    .delete(`https://techflitter.onrender.com/employees/${id}`)
     .then((response)=>{dispatch(deleteDataSuccess(id))})
     .catch((error)=>{
         console.log('error in deleting',error);
@@ -155,7 +155,7 @@ export const deleteData=(id)=>(dispatch)=>{
 // -----------searching---------------------------------
 export const SearchData=(query)=>(dispatch)=>{
     dispatch(searchDataRequest(query));
-    return axios.get(`http://localhost:8080/employees?q=${query}`,)
+    return axios.get(`https://techflitter.onrender.com/employees?q=${query}`,)
     .then((response)=>dispatch(searchDataSuccess(response.data)))
     .catch((error)=>{
         console.log("error in search data",error);

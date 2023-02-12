@@ -98,7 +98,9 @@ const reducer=(oldState=initialState,action)=>{
                    ...oldState,
                    isLoading:false,
                    employees:payload
+                   
                   }
+                  
     case types.SEARCH_EMPLOYEES_DATA_ERROR:
             return {
                    ...oldState,

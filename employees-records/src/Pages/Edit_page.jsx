@@ -1,8 +1,9 @@
-import { Heading,Box,Input,Button } from "@chakra-ui/react"
+import { Heading,Select,Box,Input,Button } from "@chakra-ui/react"
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom"
 import {getData, updateData} from '../Redux/action'
 import {useEffect, useState} from "react";
+import axios from "axios";
 import { useToast } from '@chakra-ui/react'
 
 const Edit_page = () => {
@@ -11,86 +12,104 @@ const Edit_page = () => {
   const employee=useSelector((store)=>store.employees);
   const dispatch=useDispatch();
   const navigate=useNavigate();
-
-  const [currentEmployee,setCurrentEmployee]=useState({
-    firstname:"",
+  const [currentdata, setcurrentdata] = useState({
+    firstname: "",
     lastname:"",
     employeeid:"",
-    age:"",
-    designation:"",
+    age: "",
+    designation: "",
     Imageurl:""
-
-  })
+   });
+   const Submithandler = (e) => {
+    e.preventDefault();
+    dispatch(updateData(id, currentdata));
+    toast({
+      title: 'Success',
+      description: "Employee detail updated successfully.",
+      status: 'success',
+      duration: 4000,
+      isClosable: true,
+    })
+    navigate("/");
+   };
+ 
+  const gettData = async () => {
+    const response = await axios(`https://techflitter.onrender.com/employees/${id}`);
+    const responseData = await response.data;
+    setcurrentdata({
+     ...currentdata,
+     firstname: responseData?.firstname,
+     lastname: responseData?.lastname,
+     employeeid: responseData?.employeeid,
+     age: responseData?.age,
+     designation: responseData?.designation,
+     Imageurl:responseData?.Imageurl
+    });
+   };
   useEffect(()=>{
-    getData();
+    gettData();
 
   },[dispatch,employee.length])
 
-  const dataHandle=(e)=>{
-    setCurrentEmployee(e.target.currentEmployee)
-  }
-  const formHandler=(e)=>{
-    e.preventDefault();
-    console.log(currentEmployee);
-    
-    // // dispatch(updateData(id,currentEmployee));
-    // toast({
-    //   title: 'Success',
-    //   description: "Employee detail updated successfully.",
-    //   status: 'success',
-    //   duration: 4000,
-    //   isClosable: true,
-    // })
-    // navigate("/")
-  }
+  const Handleadd = (e) => {
+    const { name, value } = e.target;
+    setcurrentdata({ ...currentdata, [name]: value });
+   };
+  
+ 
   return (
    <>
-    
-    <Box w={["70%","","50%"]} margin="auto" boxShadow='xl' p='6' rounded='md' mt={["18%","16%","10%"]}>
+     <Box w={["70%","","50%"]} margin="auto" boxShadow='xl' p='6' rounded='md' mt={["18%","16%","10%"]}>
     <Heading textAlign="center">EDIT DETAILS</Heading>
-    <form action="" onSubmit={formHandler}>
+    <form action="" onSubmit={Submithandler}>
      <Input
       type="text"
+      name="firstname"
       placeholder="First Name "
-      onChange={dataHandle}
-      value={currentEmployee.firstname}
+      value={currentdata?.firstname}
+      onChange={Handleadd}
      />
      <br /> <br />
      <Input
       type="text"
-      placeholder="Last Name "
-      onChange={dataHandle}
-      value={currentEmployee.lastname}
+      name="lastname"
+      placeholder="Last Name"
+      value={currentdata?.lastname}
+      onChange={Handleadd}
      />
      <br /> <br />
      <Input
       type="text"
       placeholder="Employee Id"
-      onChange={dataHandle}
-      value={currentEmployee.employeeid}
+      name="employeeid"
+      value={currentdata?.employeeid}
+      onChange={Handleadd}
       
      />
      <br /> <br />
      <Input
       type="number"
       placeholder="Edit Age "
-      onChange={dataHandle}
-      value={currentEmployee.age}
+      name="age"
+      value={currentdata?.age}
+      onChange={Handleadd}
     
      />
      <br /> <br />
-     <Input
-      type="text"
-      placeholder="Edit Designation "
-      onChange={dataHandle}
-      value={currentEmployee.designation}
-     />
+     <Select name="designation" value={currentdata?.designation} onChange={Handleadd} placeholder='Designation'>
+                <option value="MANAGER">MANAGER</option>
+                <option value="SDE-II">SDE-II</option>
+                <option value="SDE-I">SDE-I</option>
+                <option value="TRAINEE">TRAINEE</option>
+                <option value="INTERN">INTERN</option>
+              </Select>
      <br /> <br />
      <Input
       type="text"
       placeholder="Image url"
-      onChange={dataHandle}
-      value={currentEmployee.Imageurl}
+     name="Imageurl"
+     value={currentdata?.Imageurl}
+     onChange={Handleadd}
      />
      <br />
      <Button mt="4%" bgColor="#03a9f4" type="submit">
