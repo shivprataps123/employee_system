@@ -16,7 +16,9 @@
       "Imageurl": "https://avatars.githubusercontent.com/u/7?v=4",
       "age": 50,
       "designation": "SDE-II",
-      "id": 2
+      "id": 2,
+      "https://avatars.githubusercontent.com/u/101565730?s": "48",
+      "v": "4"
     },
     {
       "firstname": "Karen",
@@ -35,15 +37,6 @@
       "age": 35,
       "designation": "Manager",
       "id": 4
-    },
-    {
-      "firstname": "George",
-      "employeeid": "gero90",
-      "lastname": "Martin",
-      "Imageurl": "https://avatars.githubusercontent.com/u/26?v=4",
-      "age": 40,
-      "designation": "INTERN",
-      "id": 5
     },
     {
       "firstname": "Edward",

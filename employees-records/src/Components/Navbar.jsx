@@ -14,9 +14,9 @@ function Navbar() {
      display="flex"
      justifyContent="space-between"
      alignItems="center"
-     bg={colorMode === "light" ? "#03a9f4 " : "rgb(33,33,33)"}
+     bg={colorMode === "light" ? "#03a9f4" : "rgb(33,33,33)"}
      >
-      <Text cursor="pointer" display={["none","block","block"]} fontFamily="sans-serif" fontSize="30px" fontWeight="bold" color="white">Employees</Text>
+     <Text cursor="pointer" display={["none","block","block"]} fontFamily="sans-serif" fontSize="30px" fontWeight="bold" color="white">Employees</Text>
    <Box display="flex">
     <Add_details/>
     <Box mt="3px">

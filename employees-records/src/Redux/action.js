@@ -129,29 +129,29 @@ export const addData=(payload)=>(dispatch)=>{
 
 // // ------------------------request for updating data----------------------------
 
-// export const updateData=(id,payload)=>(dispatch)=>{
-//      dispatch(updateDataRequest());
-//      return axios
-//      .patch(`http://localhost:8080/employees/${id}`,payload)
-//      .then((response)=>updateDataSuccess(response.data))
-//      .catch((error)=>{
-//         console.log('error in updating',error);
-//         updateDataError(error)
-//      })
-// }
+export const updateData=(id,payload)=>(dispatch)=>{
+     dispatch(updateDataRequest());
+     return axios
+     .patch(`http://localhost:8080/employees/${id}`,payload)
+     .then((response)=>updateDataSuccess(response.data))
+     .catch((error)=>{
+        console.log('error in updating',error);
+        updateDataError(error)
+     })
+}
 
 // // ------------------------deleting data------------------
 
-// export const deleteData=(id)=>(dispatch)=>{
-//     dispatch(deleteDataRequest());
-//     return axios
-//     .delete(`http://localhost:8080/employees/${id}`)
-//     .then((response)=>{dispatch(deleteDataSuccess(id))})
-//     .catch((error)=>{
-//         console.log('error in deleting',error);
-//         dispatch(deleteDataError(error))
-//     })
-// }
+export const deleteData=(id)=>(dispatch)=>{
+    dispatch(deleteDataRequest());
+    return axios
+    .delete(`http://localhost:8080/employees/${id}`)
+    .then((response)=>{dispatch(deleteDataSuccess(id))})
+    .catch((error)=>{
+        console.log('error in deleting',error);
+        dispatch(deleteDataError(error))
+    })
+}
 // -----------searching---------------------------------
 export const SearchData=(query)=>(dispatch)=>{
     dispatch(searchDataRequest(query));

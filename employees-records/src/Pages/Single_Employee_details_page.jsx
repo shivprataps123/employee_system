@@ -2,11 +2,14 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { getData } from '../Redux/action';
-import { Box,Image,Text,SkeletonCircle,SkeletonText, Flex, Heading, Avatar } from '@chakra-ui/react';
+import { deleteData, getData } from '../Redux/action';
+import { useColorMode ,Box,Image,Text,SkeletonCircle,SkeletonText, Flex, Heading, Avatar, Button } from '@chakra-ui/react';
+import { useToast } from '@chakra-ui/react'
 const Single_Employee_details_page = () => {
+  const { colorMode } = useColorMode();
+
   const {id}=useParams();
-  console.log("sdfs",id);
+  const toast=useToast();
 
   const employees=useSelector((store)=>store.employees);
   const loading=useSelector((store)=>store.isLoading)
@@ -26,7 +29,17 @@ const Single_Employee_details_page = () => {
       employee&&setCurrentEmployee(employee)
     }
   },[id])
-  
+  const handledelete = () => {
+    dispatch(deleteData(id))
+    toast({
+      title: 'Success',
+      description: "Employee deleted successfully.",
+      status: 'success',
+      duration: 4000,
+      isClosable: true,
+    })
+    navigate("/")
+}
   if(loading){
     return <>
         <Box padding='6' boxShadow='lg' bg='white'>
@@ -37,8 +50,27 @@ const Single_Employee_details_page = () => {
   }
   return (
 <>
-<Box mt="20%">
-  <Box>
+<Heading textAlign="center" mt={["20%","13%","10%","8%"]} >Employee Details</Heading>
+<Box  boxShadow='xl' p='6' rounded='md' w={["70%","60%","","30%"]} margin="auto"  border="px solid red" mt={["8%","4%","2%"]}>
+ 
+   <Image borderRadius="50%" w="50%" display="block" margin="auto" src={currentEmployee.Imageurl}/>
+   <Box mt="2%" fontSize="20px" fontFamily="sans-serif" fontWeight="semibold">
+   <Text textAlign="center" >Full-Name : <span>{currentEmployee.firstname}</span></Text>
+   <Text textAlign="center" >Last-Name : <span>{currentEmployee.lastname}</span></Text>
+    <Text textAlign="center" >{`Employee-Id : ${currentEmployee.employeeid}`}</Text>
+    <Text textAlign='center' >{`Designation : ${currentEmployee.designation}`}</Text>
+    <Text textAlign="center" >{`Age : ${currentEmployee.age}`}</Text>
+    </Box>
+    <Box align="center" mt="3%" >
+    <Button onClick={()=>navigate(`/edit_employee/${id}`)} color="white" _hover={{ bg: '#03a9f4' }} bgColor="#03a9f4">Edit Details</Button>
+    <Button onClick={handledelete} color="white" _hover={{ bg: 'red' }}  bgColor="red" ml="10px">Delete Employee</Button>
+    </Box>
+</Box>
+
+
+
+
+  {/* <Box>
     <Image src={currentEmployee.Imageurl}/>
   </Box>
   <Box>
@@ -48,8 +80,8 @@ const Single_Employee_details_page = () => {
     <Text>{`Age : ${currentEmployee.age}`}</Text>
     
   </Box>
-  
-</Box>
+   */}
+
 </>
   )
 }

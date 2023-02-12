@@ -91,7 +91,7 @@ const Add_details = () => {
             </FormControl>
             <FormControl>
               <FormLabel>Personal Id</FormLabel>
-              <Input value={Imageurl} onChange={(e)=>setImage(e.target.value)} ref={initialRef} placeholder='Image' type="file" accept="image/*" />
+              <Input value={Imageurl} onChange={(e)=>setImage(e.target.value)} ref={initialRef} placeholder='Image url' type="text" />
             </FormControl>
           </ModalBody>
 
