@@ -3,10 +3,11 @@ import * as types from './actionTypes';
 const initialState={
     employees:[],
     isLoading:false,
-    isError:false
-    
+    isError:false,
+    activePage: 1,
+    perPage: 5
+   
 };
-
 const reducer=(oldState=initialState,action)=>{
     const {type,payload}=action;
 
@@ -90,10 +91,13 @@ const reducer=(oldState=initialState,action)=>{
         // -----search function=---------
         case types.SEARCH_EMPLOYEES_DATA_REQUEST:
             return {
+
+                       
                    ...oldState,
                    isLoading:true
                   }
     case types.SEARCH_EMPLOYEES_DATA_SUCCESS:
+        console.log("reducer",payload);
             return {
                    ...oldState,
                    isLoading:false,
@@ -107,6 +111,12 @@ const reducer=(oldState=initialState,action)=>{
                    isLoading:false,
                    isError:true
                    }
+    case types.HANDLE_PAGE_CHANGE:
+        return{
+            ...oldState,
+            activePage:payload,
+            isLoading:false
+        }
 
         default:
             return oldState

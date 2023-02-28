@@ -90,7 +90,7 @@ const Add_details = () => {
               <Input value={employeeid} onChange={(e)=>setId(e.target.value)} ref={initialRef} placeholder='Personal Id' />
             </FormControl>
             <FormControl>
-              <FormLabel>Personal Id</FormLabel>
+              <FormLabel>Image Url</FormLabel>
               <Input value={Imageurl} onChange={(e)=>setImage(e.target.value)} ref={initialRef} placeholder='Image url' type="text" />
             </FormControl>
           </ModalBody>

@@ -80,10 +80,12 @@ const deleteDataError=()=>{
     }
 }
 // -------------------search-------------------------------
-const searchDataRequest=(query)=>{
+const searchDataRequest=()=>{
     return {
         type:types.SEARCH_EMPLOYEES_DATA_REQUEST,
-        query
+        
+      
+    
     }
 }
 const searchDataSuccess=(payload)=>{
@@ -154,12 +156,33 @@ export const deleteData=(id)=>(dispatch)=>{
 }
 // -----------searching---------------------------------
 export const SearchData=(query)=>(dispatch)=>{
-    dispatch(searchDataRequest(query));
+    dispatch(searchDataRequest());
     return axios.get(`https://techflitter.onrender.com/employees?q=${query}`,)
-    .then((response)=>dispatch(searchDataSuccess(response.data)))
+    .then((response)=>{
+        dispatch(searchDataSuccess(response.data))
+        console.log("action",response.data);
+    })
     .catch((error)=>{
         console.log("error in search data",error);
         dispatch(searchDataError(error))
     })
     
+}
+
+const updatingPage=(newPage)=>{
+ return {
+    type:types.HANDLE_PAGE_CHANGE,
+    newPage
+ }
+}
+
+export const updatePage=(newPage)=>(dispatch)=>{
+
+    dispatch(updateDataRequest())
+    try{
+       
+        dispatch(updatingPage(newPage))
+    }catch(err){
+        dispatch(updateDataError())
+    }
 }
