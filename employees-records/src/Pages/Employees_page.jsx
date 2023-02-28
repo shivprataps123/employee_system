@@ -5,6 +5,7 @@ import { useDispatch,useSelector } from 'react-redux';
 import { getData, SearchData } from '../Redux/action';
 
 
+
 const Employees_page= () => {
    const employees=useSelector((store)=>store.employees)
    const loading=useSelector((store)=>store.isLoading)
@@ -56,12 +57,12 @@ const Employees_page= () => {
       dispatch(SearchData(searchValue));
       setSearchValue("");
     }
-  
+ 
   
   
    if(loading){
     return <>
-    <Stack w="50%" m="auto" mt={["25%","14%","8%"]}>
+    <Stack w="50%" m="auto" mt={["40%","24%","","12%"]}>
   <Skeleton height='20px' />
   <Skeleton height='20px' />
   <Skeleton height='20px' />
@@ -86,7 +87,7 @@ const Employees_page= () => {
     <>
   <Box border="px solid red" display="flex" justifyContent="space-between" mt={["18%","12%","10%","6%"]}>
   
-  <Box border="px solid red" display="flex" w={["","","","20%"]} ml="2%" >
+  <Box border="px solid red" display="flex" w={["","","","20%"]} ml="2%" mt={["3%","1%","1%","none"]}  >
       <Button isDisabled={page==1} onClick={()=>setPage(page-1)}>Previous</Button>
         <Button ml="5%" color="black">{page}</Button>
         <Button ml="5%" isDisabled={page==10}  onClick={()=>setPage(page+1)}>Next</Button>
@@ -132,7 +133,7 @@ const Employees_page= () => {
   </Table>
 </TableContainer>
 
-      
+   
     </>
   )
 }

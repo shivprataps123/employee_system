@@ -48,23 +48,27 @@ const Single_Employee_details_page = () => {
       <SkeletonCircle size='10' />
       <SkeletonText mt='4' noOfLines={4} spacing='4' skeletonHeight='2' />
     </Box>
+    <Box padding='6' boxShadow='lg' bg='white'>
+      <SkeletonCircle size='10' />
+      <SkeletonText mt='4' noOfLines={4} spacing='4' skeletonHeight='2' />
+    </Box>
     </>
   }
   return (
 <>
 
-<Heading  mt={["20%","13%","8%"]} ml={["20%","13%","26%"]}  >Employee Details</Heading>
-<Box display="flex" boxShadow='xl' p='6' rounded='md' w={["70%","60%","","60%"]} margin="auto"  border="px solid red" mt={["8%","4%","","1%"]}>
+<Heading  mt={["20%","13%","","8%"]} ml={["20%","13%","26%"]}  >Employee Details</Heading>
+<Box display={["block","","flex"]} boxShadow='xl' p='6' rounded='md' w={["70%","60%","","60%"]} margin="auto"  border="px solid red" mt={["8%","4%","","1%"]}>
  
-   <Box w="60%" bgColor="hsl(0,0%,92%)" borderRadius="10px" border="px solid red">
-    <Image borderRadius="100%" w="40%" display="block" margin="auto" src={currentEmployee.Imageurl}/>
+   <Box w={["","","","60%"]} bgColor="hsl(0,0%,92%)" borderRadius="10px">
+    <Image borderRadius="100%" w={["","","40%"]} display="block" margin="auto" src={currentEmployee.Imageurl}/>
   
      <Box pt="20px" align="center" mt="3%" >
     <Button onClick={()=>navigate(`/edit_employee/${id}`)} color="white" _hover={{ bg: '#03a9f4' }} bgColor="#03a9f4">Edit Details</Button>
-    <Button onClick={handledelete} color="white" _hover={{ bg: 'red' }}  bgColor="red" ml="10px">Delete Employee</Button>
+    <Button onClick={handledelete} color="white" _hover={{ bg: 'red' }}  bgColor="red" mt={["8px","",""]} ml="10px">Delete Employee</Button>
     </Box>
    </Box>
-   <Box  p="1%" fontSize="25px" fontFamily="c" fontWeight="bold" lineHeight="10" >
+   <Box  p="1%" fontSize={["18px","20px","25px"]} fontFamily="c" fontWeight="bold" lineHeight="10" >
    <Text textAlign="center"  >Full-Name : <span>{currentEmployee.firstname}</span></Text>
    <Text  textAlign="center" >Last-Name : <span>{currentEmployee.lastname}</span></Text>
     <Text  textAlign="center" >{`Employee-Id : ${currentEmployee.employeeid}`}</Text>
