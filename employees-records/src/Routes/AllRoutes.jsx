@@ -11,7 +11,6 @@ const AllRoutes = () => {
     <Route path='/' element={<Employees_page/>}/>
     <Route path='/employee/:id' element={<Single_Employee_details_page/>}/>
     <Route path="/edit_employee/:id" element={<Edit_page/>}/>
-    {/* <Route path="add_employee" element={<Add_details/>}/> */}
 </Routes>
    </>
   )
